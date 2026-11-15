@@ -46,6 +46,8 @@ implementation of the same system.
 | `DAQ_Hardware_Abstraction/`   | Backend interface; NI-DAQmx input backend (inputs only)    |
 | `GUI/`                        | Operator interface (PyQt6)                                 |
 | `Tests/`                      | Automated tests and demo scripts                           |
+| `docs/DESIGN.md`              | Assumptions, design decisions, verification, limitations   |
+| `docs/sample_run/`            | Output of a nominal run and an aborted run                 |
 | `docs/images/`                | Screenshots                                                |
 
 ---
@@ -170,6 +172,24 @@ pip install -r requirements.txt
 | High-frequency and FFT | Abort |
 | :--------------------: | :---: |
 | ![High frequency](docs/images/python_gui/03_high_frequency.png) | ![Abort](docs/images/python_gui/11_abort_sequence.png) |
+
+| Analog acquisition | Test sequence |
+| :----------------: | :-----------: |
+| ![Analog acquisition](docs/images/python_gui/02_analog_acquisition.png) | ![Test sequence](docs/images/python_gui/06_test_sequence_hold.png) |
+
+---
+
+## Simulation output
+
+| File | Contents |
+| :--- | :------- |
+| [`LabVIEW/Results/slow_log_sample_first_3s.csv`](LabVIEW/Results/slow_log_sample_first_3s.csv) | LabVIEW log, first 3 s: one row per 1 ms sample, 108 columns |
+| [`LabVIEW/Results/log_columns.txt`](LabVIEW/Results/log_columns.txt) | Meaning of each log column |
+| [`LabVIEW/Results/`](LabVIEW/Results/) | Output of the three LabVIEW test scripts |
+| [`docs/sample_run/nominal/`](docs/sample_run/nominal/) | Python run, full sequence: summary, control data at 50 Hz, events |
+| [`docs/sample_run/abort/`](docs/sample_run/abort/) | Python run aborted by a pressure-sensor failure |
+
+Design assumptions, verification and limitations are in [`docs/DESIGN.md`](docs/DESIGN.md).
 
 ---
 

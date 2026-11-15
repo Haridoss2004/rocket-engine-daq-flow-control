@@ -1,0 +1,117 @@
+{
+ "run_id": "RUN_20261115_163609_002",
+ "note": "SIMULATED test - no real hardware involved",
+ "log_start": "2026-11-15T16:36:09.334764",
+ "log_end": "2026-11-15T16:36:20.194764",
+ "duration_s": 10.86,
+ "max_pressure_bar": {
+  "value": 41.195,
+  "channel": "PT-12",
+  "t_s": 27.84
+ },
+ "max_temperature_degC": {
+  "value": 407.439,
+  "channel": "TT-01",
+  "t_s": 31.32
+ },
+ "total_flow_kg_s_controller_active": {
+  "mean": 1.67687,
+  "min": -0.00062,
+  "max": 2.50274,
+  "std": 0.74555,
+  "n": 313
+ },
+ "mixture_ratio_controller_active": {
+  "mean": 1.9989,
+  "min": 1.98344,
+  "max": 2.01927,
+  "std": 0.00449,
+  "n": 309
+ },
+ "total_flow_kg_s_hold": {
+  "mean": 2.48921,
+  "min": 2.38136,
+  "max": 2.50274,
+  "std": 0.02356,
+  "n": 103
+ },
+ "mixture_ratio_hold": {
+  "mean": 1.99944,
+  "min": 1.99253,
+  "max": 2.0043,
+  "std": 0.00205,
+  "n": 103
+ },
+ "aborted": true,
+ "abort_events": [
+  {
+   "t_s": 31.26,
+   "timestamp": "2026-11-15T16:36:18.654764",
+   "reason": "[SENSOR_FAILURE] PT-07 Chamber pressure A: pressure sensor failure - out of range / disconnected"
+  }
+ ],
+ "alarms": [
+  {
+   "t_s": 31.26,
+   "message": "PT-07 Chamber pressure A: OUT_OF_RANGE"
+  },
+  {
+   "t_s": 31.3,
+   "message": "Reset rejected: an abort condition is still active: PT-07 Chamber pressure A: pressure sensor failure - out of range / disconnected"
+  }
+ ],
+ "state_transitions": [
+  {
+   "t_s": 21.92,
+   "transition": "IDLE -> PRE-CHECK"
+  },
+  {
+   "t_s": 24.18,
+   "transition": "PRE-CHECK -> READY"
+  },
+  {
+   "t_s": 24.2,
+   "transition": "READY -> START SEQUENCE (SIMULATED)"
+  },
+  {
+   "t_s": 26.2,
+   "transition": "START SEQUENCE (SIMULATED) -> RAMP"
+  },
+  {
+   "t_s": 29.2,
+   "transition": "RAMP -> HOLD"
+  },
+  {
+   "t_s": 31.26,
+   "transition": "HOLD -> ABORT"
+  },
+  {
+   "t_s": 31.8,
+   "transition": "ABORT -> IDLE"
+  }
+ ],
+ "logger": {
+  "slow_samples": 544000,
+  "hf_samples": 13625000,
+  "csv_rows": 5400,
+  "control_rows": 544,
+  "events": 21,
+  "dropped_items": 0,
+  "queue_high_water": 5,
+  "bytes_written": 11673881,
+  "healthy": true,
+  "last_error": null,
+  "csv_rate_hz": 10.0,
+  "tdms": true,
+  "hf_log_mode": "fft_channel"
+ },
+ "files": [
+  "control.csv",
+  "events.csv",
+  "hf_raw.tdms",
+  "slow_data.csv",
+  "slow_full.tdms",
+  "summary.json",
+  "TEST_SUMMARY.md"
+ ]
+}

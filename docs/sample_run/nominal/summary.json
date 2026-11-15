@@ -1,0 +1,102 @@
+{
+ "run_id": "RUN_20261115_163548_001",
+ "note": "SIMULATED test - no real hardware involved",
+ "log_start": "2026-11-15T16:35:48.430681",
+ "log_end": "2026-11-15T16:36:08.810681",
+ "duration_s": 20.38,
+ "max_pressure_bar": {
+  "value": 41.19,
+  "channel": "PT-11",
+  "t_s": 12.56
+ },
+ "max_temperature_degC": {
+  "value": 498.639,
+  "channel": "TT-01",
+  "t_s": 16.54
+ },
+ "total_flow_kg_s_controller_active": {
+  "mean": 2.07972,
+  "min": 0.00049,
+  "max": 2.50261,
+  "std": 0.67313,
+  "n": 613
+ },
+ "mixture_ratio_controller_active": {
+  "mean": 1.99935,
+  "min": 1.95543,
+  "max": 2.01229,
+  "std": 0.00368,
+  "n": 609
+ },
+ "total_flow_kg_s_hold": {
+  "mean": 2.49752,
+  "min": 2.39298,
+  "max": 2.50261,
+  "std": 0.01152,
+  "n": 401
+ },
+ "mixture_ratio_hold": {
+  "mean": 1.99985,
+  "min": 1.99405,
+  "max": 2.00514,
+  "std": 0.00205,
+  "n": 401
+ },
+ "aborted": false,
+ "abort_events": [],
+ "alarms": [],
+ "state_transitions": [
+  {
+   "t_s": 1.0,
+   "transition": "IDLE -> PRE-CHECK"
+  },
+  {
+   "t_s": 3.3,
+   "transition": "PRE-CHECK -> READY"
+  },
+  {
+   "t_s": 3.36,
+   "transition": "READY -> START SEQUENCE (SIMULATED)"
+  },
+  {
+   "t_s": 5.36,
+   "transition": "START SEQUENCE (SIMULATED) -> RAMP"
+  },
+  {
+   "t_s": 8.38,
+   "transition": "RAMP -> HOLD"
+  },
+  {
+   "t_s": 16.4,
+   "transition": "HOLD -> SHUTDOWN (SIMULATED)"
+  },
+  {
+   "t_s": 19.4,
+   "transition": "SHUTDOWN (SIMULATED) -> COMPLETE"
+  }
+ ],
+ "logger": {
+  "slow_samples": 1020000,
+  "hf_samples": 25500000,
+  "csv_rows": 10200,
+  "control_rows": 1020,
+  "events": 11,
+  "dropped_items": 0,
+  "queue_high_water": 4,
+  "bytes_written": 119839945,
+  "healthy": true,
+  "last_error": null,
+  "csv_rate_hz": 10.0,
+  "tdms": true,
+  "hf_log_mode": "all"
+ },
+ "files": [
+  "control.csv",
+  "events.csv",
+  "hf_raw.tdms",
+  "slow_data.csv",
+  "slow_full.tdms",
+  "summary.json",
+  "TEST_SUMMARY.md"
+ ]
+}

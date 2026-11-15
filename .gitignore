@@ -17,6 +17,8 @@ Results/test_results.*
 # unused screenshots
 docs/images/python_gui/*
 !docs/images/python_gui/01_system_overview.png
+!docs/images/python_gui/02_analog_acquisition.png
+!docs/images/python_gui/06_test_sequence_hold.png
 !docs/images/python_gui/03_high_frequency.png
 !docs/images/python_gui/05_flow_control.png
 !docs/images/python_gui/11_abort_sequence.png
