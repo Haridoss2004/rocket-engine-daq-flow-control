@@ -1,0 +1,7 @@
+numpy>=1.24
+scipy>=1.10
+PyQt6>=6.5
+pyqtgraph>=0.13
+npTDMS>=1.9
+nidaqmx>=1.0   # optional: only for --backend nidaqmx / --discover
+pytest>=8.0    # tests only

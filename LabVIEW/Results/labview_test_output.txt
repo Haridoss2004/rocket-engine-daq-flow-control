@@ -1,0 +1,19 @@
+exec state: 1
+RUN 1 nominal
+   HOLD: state=5.000 tsec=10.700 totalflow=2.499 mixratio=2.002 thrust=3002.164 cmdox=5.392 cmdfuel=5.301 abortcode=0.000 aborttime=0.000
+   FFT: 2500 bins, dominant 1200 Hz, amplitude 0.999 (peak)
+   PT-01 tank 40.06 bar (raw 4.205 V), PT-07 chamber 19.94 bar (raw 2.595 V), TT-01 393.1 degC, FT-01 1.667 kg/s
+RUN 2 overpressure abort
+   ABORT: state=8.000 tsec=26.200 totalflow=0.353 mixratio=2.012 thrust=3244.748 cmdox=0.000 cmdfuel=0.000 abortcode=1.000 aborttime=26.103
+   reset while fault active -> ABORT
+RUN 3 sensor disconnect
+   ABORT: state=8.000 tsec=32.700 totalflow=0.171 mixratio=2.010 thrust=422.004 cmdox=0.000 cmdfuel=0.000 abortcode=2.000 aborttime=32.601
+RUN 4 stuck sensor
+   ABORT: state=8.000 tsec=40.700 totalflow=2.496 mixratio=2.000 thrust=2994.783 cmdox=0.000 cmdfuel=0.000 abortcode=3.000 aborttime=40.700
+RUN 5 e-stop
+   ABORT: state=8.000 tsec=43.100 totalflow=-0.001 mixratio=0.000 thrust=-1.182 cmdox=0.000 cmdfuel=0.000 abortcode=4.000 aborttime=43.001
+RUN 6 fault before start: pre-check must not pass
+   reached READY: False -> state IDLE
+stopped; exec state: 1
+CSV rows: 54700 cols: 108 size MB: 37.9
+ALL OK

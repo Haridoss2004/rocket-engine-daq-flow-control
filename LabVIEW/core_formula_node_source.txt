@@ -1,0 +1,175 @@
+/* ROCKET ENGINE DAQ core - SIMULATION ONLY. Runs once per 100 ms loop: 100 steps of 1 ms.
+   Demonstration values only. Outputs are virtual, nothing drives hardware. */
+float64 Xn[32], RAW[50], ENG[50], LOG[10800], HFW[5000], HFS[5000], HRMS[25], DIO[60];
+float64 TV[50], G[50], O[50];
+int32 i, k, c, st, burn, enab, mainv, vent, press, ign, purge, code, ok, pcmd, sat;
+float64 dt, amb, tt, tent, pot, pft, pox, pfu, fo, ff, pc, tch, io, ifu, uo, uf;
+float64 ac, at, oks, ovc, hfn, mass, lastr, stale, el, frac, spt, spo, spf, e, un, us;
+float64 pcm, dp, ft, kc, tg, tau, thr, r, v, lv, a, f1, s2, ph, lim, fom, ffm, step;
+dt = 0.001; amb = 1.0;
+tt = X[0]; st = X[1]; tent = X[2]; pot = X[3]; pft = X[4]; pox = X[5]; pfu = X[6];
+fo = X[7]; ff = X[8]; pc = X[9]; burn = X[10]; tch = X[11]; io = X[12]; ifu = X[13];
+uo = X[14]; uf = X[15]; ac = X[16]; at = X[17]; oks = X[18]; ovc = X[19]; hfn = X[20];
+mass = X[21]; lastr = X[22]; stale = X[23]; pcmd = X[24];
+if (X[25] < 0.5) { pot = amb; pft = amb; pc = amb; tch = 22.0; mass = 80.0; oks = -1.0; }
+for (i = 0; i < 50; i++) {
+  if (i < 20) { G[i] = 12.5; O[i] = -12.5; }
+  else { if (i < 36) { G[i] = 100.0; O[i] = -300.0; }
+  else { if (i < 39) { G[i] = 250.0; O[i] = -250.0; }
+  else { G[i] = 12.5; O[i] = -12.5; } } }
+}
+G[40] = 0.5; O[40] = -0.5; G[41] = 0.5; O[41] = -0.5;
+G[44] = 4.0; O[44] = -4.0; G[45] = 1.25; O[45] = -1.25; G[46] = 4.0; O[46] = -4.0;
+G[49] = 1.0; O[49] = 0.0;
+code = 0;
+for (k = 0; k < 100; k++) {
+  tt = tt + dt; el = tt - tent;
+  /* operator command, acted on when it changes: 1 start test, 2 start sequence, 3 stop, 4 reset, 5 abort */
+  if (cmd != pcmd) {
+    if (cmd == 1 && st == 0) { st = 1; tent = tt; oks = -1.0; }
+    if (cmd == 2 && st == 2) { st = 3; tent = tt; }
+    if (cmd == 3 && (st == 1 || st == 2)) { st = 0; tent = tt; }
+    if (cmd == 3 && (st == 3 || st == 4 || st == 5)) { st = 6; tent = tt; }
+    if (cmd == 4 && st == 7) { st = 0; tent = tt; mass = 80.0; }
+    if (cmd == 4 && st == 8 && estop < 0.5 && fault < 0.5) { st = 0; tent = tt; ac = 0.0; at = 0.0; mass = 80.0; }
+    if (cmd == 5 && st != 8) { code = 6; }
+    pcmd = cmd;
+  }
+  el = tt - tent;
+  /* sequencer timing */
+  if (st == 3 && el >= 2.0) { if (pc < 3.0) { code = 5; } else { st = 4; tent = tt; el = 0.0; } }
+  if (st == 4 && el >= 3.0) { st = 5; tent = tt; el = 0.0; }
+  if (st == 5 && el >= hold) { st = 6; tent = tt; el = 0.0; }
+  if (st == 6 && el >= 3.0) { st = 7; tent = tt; el = 0.0; }
+  el = tt - tent;
+  /* virtual outputs for the current state */
+  press = (st >= 1 && st <= 5);
+  vent = (st == 0 || st == 7 || st == 8 || (st == 6 && el >= 2.0));
+  ign = (st == 3 && el >= 0.4);
+  mainv = ((st == 3 && el >= 0.8) || st == 4 || st == 5 || (st == 6 && el < 1.0));
+  purge = ((st == 3 && el < 0.3) || st == 6 || st == 8);
+  enab = ((st == 3 && el >= 0.8) || st == 4 || st == 5);
+  frac = 1.0;
+  if (st == 3) { frac = 0.3; }
+  if (st == 4) { frac = 0.3 + 0.7 * el / 3.0; }
+  /* simulated plant */
+  if (vent) { pot = pot + (amb - pot) * dt / 1.2; pft = pft + (amb - pft) * dt / 1.2; }
+  else { if (press) { pot = pot + (40.0 - pot) * dt / 0.6; pft = pft + (40.0 - pft) * dt / 0.6; } }
+  pox = pox + (uo / 10.0 - pox) * dt / 0.12;
+  pfu = pfu + (uf / 10.0 - pfu) * dt / 0.12;
+  dp = pot - 0.8 * fo - pc; if (dp < 0.0) { dp = 0.0; }
+  ft = 3.2 * pox * mainv * sqrt(dp / 20.0);
+  fo = fo + (ft - fo) * dt / 0.05;
+  dp = pft - 0.8 * ff - pc; if (dp < 0.0) { dp = 0.0; }
+  ft = 1.6 * pfu * mainv * sqrt(dp / 20.0);
+  ff = ff + (ft - ff) * dt / 0.05;
+  mass = mass - (fo + ff) * dt;
+  if (ign && fo > 0.1 && ff > 0.05) { burn = 1; }
+  if (burn && (fo < 0.05 || ff < 0.03)) { burn = 0; }
+  kc = 0.6; if (burn) { kc = 7.6; }
+  pc = pc + (amb + kc * (fo + ff) - pc) * dt / 0.03;
+  pcm = pc; if (fault == 1) { pcm = pc + 15.0; }
+  tg = 22.0; if (burn) { tg = 22.0 + 26.0 * (pc - amb); }
+  tau = 9.0; if (tg > tch) { tau = 3.0; }
+  tch = tch + (tg - tch) * dt / tau;
+  thr = 158.0 * (pcm - amb); if (thr < 0.0) { thr = 0.0; } if (!burn) { thr = thr * 0.05; }
+  /* true values of the 50 slow channels */
+  TV[0] = pot; TV[1] = pft; TV[2] = pot - 1.4 * fo; TV[3] = pft - 1.4 * ff;
+  TV[4] = pcm * 1.05; TV[5] = pcm * 1.05; TV[6] = pcm; TV[7] = pcm;
+  TV[8] = 1.0 + 14.0 * purge; TV[9] = 8.0; TV[10] = pot * 1.02 + 0.3; TV[11] = pft * 1.02 + 0.3;
+  TV[12] = 0.99 * (pot - 1.4 * fo); TV[13] = 0.99 * (pft - 1.4 * ff); TV[14] = 0.95 * pcm;
+  TV[15] = 0.55 * pcm + 0.45; TV[16] = 4.8; TV[17] = 3.6; TV[18] = amb; TV[19] = amb;
+  for (i = 20; i < 36; i++) { TV[i] = 22.0 + (tch - 22.0) * (36 - i) / 16.0; }
+  TV[36] = thr / 3.0; TV[37] = thr / 3.0; TV[38] = thr / 3.0; TV[39] = mass;
+  TV[40] = fo; TV[41] = ff; TV[42] = 100.0 * pox; TV[43] = 100.0 * pfu;
+  TV[44] = 24.0; TV[45] = 1.5; TV[46] = 1.0 + 24.0 * ign; TV[47] = 45.0; TV[48] = 2.0; TV[49] = 5.0;
+  /* sensors: true value -> raw volts (+ noise, faults) -> SCALING: eng = raw * gain + offset */
+  for (i = 0; i < 50; i++) {
+    r = (TV[i] - O[i]) / G[i] + 0.004 * (rand() + rand() + rand() - 1.5);
+    if (i == 6 && fault == 2) { r = 0.01 + 0.002 * rand(); }
+    if (i == 6 && fault == 3) { r = lastr; }
+    RAW[i] = r;
+    ENG[i] = r * G[i] + O[i];
+  }
+  if (RAW[6] == lastr) { stale = stale + 1.0; } else { stale = 0.0; }
+  lastr = RAW[6];
+  /* safety monitor */
+  ok = 1;
+  for (i = 0; i < 20; i++) {
+    if (RAW[i] < 0.5 || RAW[i] > 9.8) { ok = 0; if (st >= 2 && st <= 6 && code == 0) { code = 2; } }
+  }
+  if (stale >= 500.0) { ok = 0; if (st >= 2 && st <= 6 && code == 0) { code = 3; } }
+  if (ENG[6] > plimit || ENG[7] > plimit) { ovc = ovc + 1.0; } else { ovc = 0.0; }
+  if (ovc >= 3.0 && st >= 2 && st <= 6 && code == 0) { code = 1; }
+  if (estop > 0.5 && code == 0) { code = 4; }
+  if (code != 0 && st != 8) { st = 8; tent = tt; ac = code; at = tt; uo = 0.0; uf = 0.0; io = 0.0; ifu = 0.0; enab = 0; }
+  /* pre-check */
+  if (st == 1) {
+    if (ok && ENG[0] > 35.0 && ENG[0] < 45.0 && ENG[1] > 35.0 && ENG[1] < 45.0 && ENG[6] < 2.5 && estop < 0.5) {
+      if (oks < 0.0) { oks = tt; } else { if (tt - oks >= 1.0) { st = 2; tent = tt; } }
+    } else { oks = -1.0; if (el > 10.0) { st = 0; tent = tt; } }
+  }
+  /* flow controller: total flow and mixture ratio -> one PI loop per valve */
+  fom = ENG[40]; ffm = ENG[41];
+  step = 20.0 * dt;
+  if (enab) {
+    spt = total * frac; spo = spt * mr / (1.0 + mr); spf = spt / (1.0 + mr);
+    e = spo - fom; un = 2.5 * e + io + 22.0 * e * dt;
+    us = un; if (us > 10.0) { us = 10.0; } if (us < 0.0) { us = 0.0; }
+    sat = (us != un);
+    if (us > uo + step) { us = uo + step; sat = 1; } if (us < uo - step) { us = uo - step; sat = 1; }
+    if (!sat || (un > us && e < 0.0) || (un < us && e > 0.0)) { io = io + 22.0 * e * dt; }
+    if (io > 10.0) { io = 10.0; } if (io < 0.0) { io = 0.0; }
+    uo = us;
+    e = spf - ffm; un = 5.0 * e + ifu + 44.0 * e * dt;
+    us = un; if (us > 10.0) { us = 10.0; } if (us < 0.0) { us = 0.0; }
+    sat = (us != un);
+    if (us > uf + step) { us = uf + step; sat = 1; } if (us < uf - step) { us = uf - step; sat = 1; }
+    if (!sat || (un > us && e < 0.0) || (un < us && e > 0.0)) { ifu = ifu + 44.0 * e * dt; }
+    if (ifu > 10.0) { ifu = 10.0; } if (ifu < 0.0) { ifu = 0.0; }
+    uf = us;
+  } else {
+    spt = 0.0;
+    uo = uo - step; if (uo < 0.0) { uo = 0.0; }
+    uf = uf - step; if (uf < 0.0) { uf = 0.0; }
+    io = uo; ifu = uf;
+  }
+  /* log row: time, state, abort code, set-point, flows, valve commands, 50 raw, 50 scaled */
+  c = k * 108;
+  LOG[c] = tt; LOG[c + 1] = st; LOG[c + 2] = ac; LOG[c + 3] = spt; LOG[c + 4] = fom; LOG[c + 5] = ffm;
+  LOG[c + 6] = uo; LOG[c + 7] = uf;
+  for (i = 0; i < 50; i++) { LOG[c + 8 + i] = RAW[i]; LOG[c + 58 + i] = ENG[i]; }
+}
+/* 25 high-frequency channels, 5000 samples each (50 kS/s for 100 ms).
+   HFS = selected channel with a Hann window (amplitude corrected) for the FFT */
+lv = 0.0; if (burn) { lv = (pc - amb) / 19.0; }
+for (c = 0; c < 25; c++) {
+  if (c < 10) { f1 = 1200.0 + 35.0 * c; } else { if (c < 20) { f1 = 800.0 + 20.0 * (c - 10); } else { f1 = 1000.0 + 500.0 * (24 - c); } }
+  a = 0.02 + 0.98 * lv; if (c == 24) { a = 1.0; }
+  s2 = 0.0;
+  for (i = 0; i < 5000; i++) {
+    ph = 2.0 * pi * (hfn + i) / 50000.0;
+    v = a * sin(f1 * ph) + 0.4 * a * sin(2.0 * f1 * ph) + 0.1 * (rand() + rand() + rand() - 1.5);
+    if (fault == 7 && c < 20) { v = v + 3.0 * sin(1850.0 * ph); }
+    s2 = s2 + v * v;
+    if (c == fftch) { HFW[i] = v; HFS[i] = v * (1.0 - cos(2.0 * pi * i / 5000.0)); }
+  }
+  HRMS[c] = sqrt(s2 / 5000.0);
+}
+hfn = hfn + 5000.0;
+/* digital inputs 0..29 and virtual digital outputs 30..59 */
+for (i = 0; i < 60; i++) { DIO[i] = 0.0; }
+DIO[0] = (estop < 0.5); DIO[1] = 1.0; DIO[2] = 1.0; DIO[3] = 1.0; DIO[4] = 1.0; DIO[5] = 1.0;
+DIO[6] = mainv; DIO[7] = !mainv; DIO[8] = mainv; DIO[9] = !mainv; DIO[10] = vent; DIO[11] = !vent;
+DIO[12] = vent; DIO[13] = !vent; DIO[14] = purge; DIO[15] = !purge; DIO[16] = press; DIO[17] = !press;
+DIO[20] = (pc > 3.0); DIO[21] = burn;
+DIO[30] = mainv; DIO[31] = mainv; DIO[32] = vent; DIO[33] = vent; DIO[34] = purge; DIO[35] = press;
+DIO[36] = press; DIO[37] = ign; DIO[39] = (st >= 2 && st != 7); DIO[43] = (st == 8);
+/* outputs */
+state = st; tsec = tt; totalflow = fom + ffm; mixratio = 0.0; if (ffm > 0.02) { mixratio = fom / ffm; }
+pcbar = ENG[6]; cmdox = uo; cmdfuel = uf; abortcode = ac; aborttime = at; thrust = ENG[36] + ENG[37] + ENG[38];
+Xn[0] = tt; Xn[1] = st; Xn[2] = tent; Xn[3] = pot; Xn[4] = pft; Xn[5] = pox; Xn[6] = pfu;
+Xn[7] = fo; Xn[8] = ff; Xn[9] = pc; Xn[10] = burn; Xn[11] = tch; Xn[12] = io; Xn[13] = ifu;
+Xn[14] = uo; Xn[15] = uf; Xn[16] = ac; Xn[17] = at; Xn[18] = oks; Xn[19] = ovc; Xn[20] = hfn;
+Xn[21] = mass; Xn[22] = lastr; Xn[23] = stale; Xn[24] = pcmd; Xn[25] = 1.0;
+for (i = 26; i < 32; i++) { Xn[i] = 0.0; }

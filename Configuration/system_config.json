@@ -1,0 +1,2472 @@
+{
+ "meta": {
+  "project": "ROCKET ENGINE TEST STAND - DAQ acquisition and flow control SIMULATION",
+  "config_version": 1,
+  "disclaimer": "SIMULATION ONLY. All calibrations, set-points and limits are DEMONSTRATION values. Not validated for any real engine or hardware."
+ },
+ "acquisition": {
+  "backend": "simulation",
+  "slow_rate_hz": 1000.0,
+  "slow_block_samples": 20,
+  "hf_rate_hz": 50000.0,
+  "hf_block_samples": 5000,
+  "hf_buffer_s": 2.0,
+  "trend_history_s": 120.0
+ },
+ "slow_channels": [
+  {
+   "index": 0,
+   "id": "PT-01",
+   "name": "OX tank pressure",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 46.0,
+   "abort_hi": 50.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_ox_tank",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 1,
+   "id": "PT-02",
+   "name": "Fuel tank pressure",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 46.0,
+   "abort_hi": 50.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_fuel_tank",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 2,
+   "id": "PT-03",
+   "name": "OX feed line pressure",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 46.0,
+   "abort_hi": 50.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_ox_line",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 3,
+   "id": "PT-04",
+   "name": "Fuel feed line pressure",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 46.0,
+   "abort_hi": 50.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_fuel_line",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 4,
+   "id": "PT-05",
+   "name": "OX injector manifold pressure",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 32.0,
+   "abort_hi": 38.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_ox_inj",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 5,
+   "id": "PT-06",
+   "name": "Fuel injector manifold pressure",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 32.0,
+   "abort_hi": 38.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_fuel_inj",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 6,
+   "id": "PT-07",
+   "name": "Chamber pressure A",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 24.0,
+   "abort_hi": 28.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_chamber",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 7,
+   "id": "PT-08",
+   "name": "Chamber pressure B (redundant)",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 24.0,
+   "abort_hi": 28.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_chamber",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 8,
+   "id": "PT-09",
+   "name": "N2 purge supply pressure",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 20.0,
+   "abort_hi": 25.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_purge",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 9,
+   "id": "PT-10",
+   "name": "Pneumatic supply pressure",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": 6.0,
+   "warn_hi": 10.0,
+   "abort_hi": 12.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_pneu",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 10,
+   "id": "PT-11",
+   "name": "OX pressurant regulator outlet",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 47.0,
+   "abort_hi": 52.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_ox_tank",
+    "k": 1.02,
+    "b": 0.3,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 11,
+   "id": "PT-12",
+   "name": "Fuel pressurant regulator outlet",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 47.0,
+   "abort_hi": 52.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_fuel_tank",
+    "k": 1.02,
+    "b": 0.3,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 12,
+   "id": "PT-13",
+   "name": "OX venturi upstream pressure",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 46.0,
+   "abort_hi": 50.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_ox_line",
+    "k": 0.99,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 13,
+   "id": "PT-14",
+   "name": "Fuel venturi upstream pressure",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 46.0,
+   "abort_hi": 50.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_fuel_line",
+    "k": 0.99,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 14,
+   "id": "PT-15",
+   "name": "Igniter cavity pressure",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 24.0,
+   "abort_hi": 28.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_chamber",
+    "k": 0.95,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 15,
+   "id": "PT-16",
+   "name": "Nozzle wall static pressure",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 15.0,
+   "abort_hi": 18.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_chamber",
+    "k": 0.55,
+    "b": 0.45,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 16,
+   "id": "PT-17",
+   "name": "Coolant inlet pressure",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 8.0,
+   "abort_hi": 10.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_pneu",
+    "k": 0.6,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 17,
+   "id": "PT-18",
+   "name": "Coolant outlet pressure",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 8.0,
+   "abort_hi": 10.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_pneu",
+    "k": 0.45,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 18,
+   "id": "PT-19",
+   "name": "Test cell ambient pressure",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 1.5,
+   "abort_hi": 3.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_amb",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 19,
+   "id": "PT-20",
+   "name": "Spare pressure channel",
+   "sensor_type": "pressure",
+   "unit": "bar",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 1.5,
+   "abort_hi": 3.0,
+   "enabled": true,
+   "sim": {
+    "source": "p_amb",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 20,
+   "id": "TT-01",
+   "name": "Chamber wall temperature 1",
+   "sensor_type": "temperature",
+   "unit": "degC",
+   "gain": 100.0,
+   "offset": -300.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 550.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "t_chamber",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.003
+   }
+  },
+  {
+   "index": 21,
+   "id": "TT-02",
+   "name": "Chamber wall temperature 2",
+   "sensor_type": "temperature",
+   "unit": "degC",
+   "gain": 100.0,
+   "offset": -300.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 550.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "t_chamber",
+    "k": 0.93,
+    "b": 2.0,
+    "noise_v": 0.003
+   }
+  },
+  {
+   "index": 22,
+   "id": "TT-03",
+   "name": "Nozzle throat temperature",
+   "sensor_type": "temperature",
+   "unit": "degC",
+   "gain": 100.0,
+   "offset": -300.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 550.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "t_nozzle",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.003
+   }
+  },
+  {
+   "index": 23,
+   "id": "TT-04",
+   "name": "Nozzle exit temperature",
+   "sensor_type": "temperature",
+   "unit": "degC",
+   "gain": 100.0,
+   "offset": -300.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 550.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "t_nozzle",
+    "k": 0.7,
+    "b": 6.0,
+    "noise_v": 0.003
+   }
+  },
+  {
+   "index": 24,
+   "id": "TT-05",
+   "name": "OX feed line temperature",
+   "sensor_type": "temperature",
+   "unit": "degC",
+   "gain": 100.0,
+   "offset": -300.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 60.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "t_ox",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.003
+   }
+  },
+  {
+   "index": 25,
+   "id": "TT-06",
+   "name": "OX tank temperature",
+   "sensor_type": "temperature",
+   "unit": "degC",
+   "gain": 100.0,
+   "offset": -300.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 60.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "t_ox",
+    "k": 0.2,
+    "b": 16.0,
+    "noise_v": 0.003
+   }
+  },
+  {
+   "index": 26,
+   "id": "TT-07",
+   "name": "Fuel feed line temperature",
+   "sensor_type": "temperature",
+   "unit": "degC",
+   "gain": 100.0,
+   "offset": -300.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 60.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "t_fuel",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.003
+   }
+  },
+  {
+   "index": 27,
+   "id": "TT-08",
+   "name": "Fuel tank temperature",
+   "sensor_type": "temperature",
+   "unit": "degC",
+   "gain": 100.0,
+   "offset": -300.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 60.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "t_amb",
+    "k": 1.0,
+    "b": 0.5,
+    "noise_v": 0.003
+   }
+  },
+  {
+   "index": 28,
+   "id": "TT-09",
+   "name": "Coolant inlet temperature",
+   "sensor_type": "temperature",
+   "unit": "degC",
+   "gain": 100.0,
+   "offset": -300.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 60.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "t_amb",
+    "k": 1.0,
+    "b": -2.0,
+    "noise_v": 0.003
+   }
+  },
+  {
+   "index": 29,
+   "id": "TT-10",
+   "name": "Coolant outlet temperature",
+   "sensor_type": "temperature",
+   "unit": "degC",
+   "gain": 100.0,
+   "offset": -300.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 120.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "t_coolant",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.003
+   }
+  },
+  {
+   "index": 30,
+   "id": "TT-11",
+   "name": "Injector face temperature",
+   "sensor_type": "temperature",
+   "unit": "degC",
+   "gain": 100.0,
+   "offset": -300.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 300.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "t_chamber",
+    "k": 0.35,
+    "b": 14.0,
+    "noise_v": 0.003
+   }
+  },
+  {
+   "index": 31,
+   "id": "TT-12",
+   "name": "Igniter body temperature",
+   "sensor_type": "temperature",
+   "unit": "degC",
+   "gain": 100.0,
+   "offset": -300.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 300.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "t_chamber",
+    "k": 0.25,
+    "b": 16.0,
+    "noise_v": 0.003
+   }
+  },
+  {
+   "index": 32,
+   "id": "TT-13",
+   "name": "Thrust stand temperature",
+   "sensor_type": "temperature",
+   "unit": "degC",
+   "gain": 100.0,
+   "offset": -300.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 60.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "t_amb",
+    "k": 1.0,
+    "b": 1.0,
+    "noise_v": 0.003
+   }
+  },
+  {
+   "index": 33,
+   "id": "TT-14",
+   "name": "Test cell ambient temperature",
+   "sensor_type": "temperature",
+   "unit": "degC",
+   "gain": 100.0,
+   "offset": -300.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 60.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "t_amb",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.003
+   }
+  },
+  {
+   "index": 34,
+   "id": "TT-15",
+   "name": "DAQ cabinet temperature",
+   "sensor_type": "temperature",
+   "unit": "degC",
+   "gain": 100.0,
+   "offset": -300.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 60.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "t_amb",
+    "k": 1.0,
+    "b": 6.0,
+    "noise_v": 0.003
+   }
+  },
+  {
+   "index": 35,
+   "id": "TT-16",
+   "name": "Spare thermocouple",
+   "sensor_type": "temperature",
+   "unit": "degC",
+   "gain": 100.0,
+   "offset": -300.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 60.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "t_amb",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.003
+   }
+  },
+  {
+   "index": 36,
+   "id": "LC-01",
+   "name": "Thrust load cell 1",
+   "sensor_type": "load_cell",
+   "unit": "N",
+   "gain": 250.0,
+   "offset": -250.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 1500.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "thrust",
+    "k": 0.3333333333333333,
+    "b": 0.0,
+    "noise_v": 0.004
+   }
+  },
+  {
+   "index": 37,
+   "id": "LC-02",
+   "name": "Thrust load cell 2",
+   "sensor_type": "load_cell",
+   "unit": "N",
+   "gain": 250.0,
+   "offset": -250.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 1500.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "thrust",
+    "k": 0.3333333333333333,
+    "b": 0.0,
+    "noise_v": 0.004
+   }
+  },
+  {
+   "index": 38,
+   "id": "LC-03",
+   "name": "Thrust load cell 3",
+   "sensor_type": "load_cell",
+   "unit": "N",
+   "gain": 250.0,
+   "offset": -250.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 1500.0,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "thrust",
+    "k": 0.3333333333333333,
+    "b": 0.0,
+    "noise_v": 0.004
+   }
+  },
+  {
+   "index": 39,
+   "id": "LC-04",
+   "name": "Propellant tank mass (run tank)",
+   "sensor_type": "load_cell",
+   "unit": "kg",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": 5.0,
+   "warn_hi": null,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "mass_prop",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.003
+   }
+  },
+  {
+   "index": 40,
+   "id": "FT-01",
+   "name": "Oxidizer mass flow (SIMULATED)",
+   "sensor_type": "flow",
+   "unit": "kg/s",
+   "gain": 0.5,
+   "offset": -0.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 3.5,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "flow_ox",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.006
+   }
+  },
+  {
+   "index": 41,
+   "id": "FT-02",
+   "name": "Fuel mass flow (SIMULATED)",
+   "sensor_type": "flow",
+   "unit": "kg/s",
+   "gain": 0.5,
+   "offset": -0.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": 3.5,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "flow_fuel",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.006
+   }
+  },
+  {
+   "index": 42,
+   "id": "ZT-01",
+   "name": "OX control valve position feedback",
+   "sensor_type": "position",
+   "unit": "%",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": null,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "pos_ox",
+    "k": 100.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 43,
+   "id": "ZT-02",
+   "name": "Fuel control valve position feedback",
+   "sensor_type": "position",
+   "unit": "%",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": null,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "pos_fuel",
+    "k": 100.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 44,
+   "id": "VT-01",
+   "name": "24 V bus voltage",
+   "sensor_type": "voltage",
+   "unit": "V",
+   "gain": 4.0,
+   "offset": -4.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": null,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "bus_v",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 45,
+   "id": "IT-01",
+   "name": "24 V bus current",
+   "sensor_type": "current",
+   "unit": "A",
+   "gain": 1.25,
+   "offset": -1.25,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": null,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "bus_i",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 46,
+   "id": "VT-02",
+   "name": "Igniter supply voltage",
+   "sensor_type": "voltage",
+   "unit": "V",
+   "gain": 4.0,
+   "offset": -4.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": null,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "ign_v",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 47,
+   "id": "RH-01",
+   "name": "Test cell relative humidity",
+   "sensor_type": "humidity",
+   "unit": "%RH",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": null,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "humidity",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 48,
+   "id": "GD-01",
+   "name": "Gas detector (LEL)",
+   "sensor_type": "gas",
+   "unit": "%LEL",
+   "gain": 12.5,
+   "offset": -12.5,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": null,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "lel",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  },
+  {
+   "index": 49,
+   "id": "AX-01",
+   "name": "Spare slow analog input",
+   "sensor_type": "other",
+   "unit": "V",
+   "gain": 1.0,
+   "offset": 0.0,
+   "raw_valid_min_v": 0.5,
+   "raw_valid_max_v": 9.8,
+   "warn_lo": null,
+   "warn_hi": null,
+   "abort_hi": null,
+   "enabled": true,
+   "sim": {
+    "source": "spare_v",
+    "k": 1.0,
+    "b": 0.0,
+    "noise_v": 0.002
+   }
+  }
+ ],
+ "hf_channels": [
+  {
+   "index": 0,
+   "id": "DP-01",
+   "name": "Dynamic pressure 1",
+   "sensor_type": "dynamic_pressure",
+   "unit": "bar",
+   "gain": 0.5,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      1200.0,
+      1.2
+     ],
+     [
+      2400.0,
+      0.5
+     ],
+     [
+      5100.0,
+      0.2
+     ]
+    ],
+    "idle_gain": 0.02,
+    "noise_v": 0.05
+   }
+  },
+  {
+   "index": 1,
+   "id": "DP-02",
+   "name": "Dynamic pressure 2",
+   "sensor_type": "dynamic_pressure",
+   "unit": "bar",
+   "gain": 0.5,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      1235.0,
+      1.2
+     ],
+     [
+      2470.0,
+      0.5
+     ],
+     [
+      5100.0,
+      0.2
+     ]
+    ],
+    "idle_gain": 0.02,
+    "noise_v": 0.05
+   }
+  },
+  {
+   "index": 2,
+   "id": "DP-03",
+   "name": "Dynamic pressure 3",
+   "sensor_type": "dynamic_pressure",
+   "unit": "bar",
+   "gain": 0.5,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      1270.0,
+      1.2
+     ],
+     [
+      2540.0,
+      0.5
+     ],
+     [
+      5100.0,
+      0.2
+     ]
+    ],
+    "idle_gain": 0.02,
+    "noise_v": 0.05
+   }
+  },
+  {
+   "index": 3,
+   "id": "DP-04",
+   "name": "Dynamic pressure 4",
+   "sensor_type": "dynamic_pressure",
+   "unit": "bar",
+   "gain": 0.5,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      1305.0,
+      1.2
+     ],
+     [
+      2610.0,
+      0.5
+     ],
+     [
+      5100.0,
+      0.2
+     ]
+    ],
+    "idle_gain": 0.02,
+    "noise_v": 0.05
+   }
+  },
+  {
+   "index": 4,
+   "id": "DP-05",
+   "name": "Dynamic pressure 5",
+   "sensor_type": "dynamic_pressure",
+   "unit": "bar",
+   "gain": 0.5,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      1340.0,
+      1.2
+     ],
+     [
+      2680.0,
+      0.5
+     ],
+     [
+      5100.0,
+      0.2
+     ]
+    ],
+    "idle_gain": 0.02,
+    "noise_v": 0.05
+   }
+  },
+  {
+   "index": 5,
+   "id": "DP-06",
+   "name": "Dynamic pressure 6",
+   "sensor_type": "dynamic_pressure",
+   "unit": "bar",
+   "gain": 0.5,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      1375.0,
+      1.2
+     ],
+     [
+      2750.0,
+      0.5
+     ],
+     [
+      5100.0,
+      0.2
+     ]
+    ],
+    "idle_gain": 0.02,
+    "noise_v": 0.05
+   }
+  },
+  {
+   "index": 6,
+   "id": "DP-07",
+   "name": "Dynamic pressure 7",
+   "sensor_type": "dynamic_pressure",
+   "unit": "bar",
+   "gain": 0.5,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      1410.0,
+      1.2
+     ],
+     [
+      2820.0,
+      0.5
+     ],
+     [
+      5100.0,
+      0.2
+     ]
+    ],
+    "idle_gain": 0.02,
+    "noise_v": 0.05
+   }
+  },
+  {
+   "index": 7,
+   "id": "DP-08",
+   "name": "Dynamic pressure 8",
+   "sensor_type": "dynamic_pressure",
+   "unit": "bar",
+   "gain": 0.5,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      1445.0,
+      1.2
+     ],
+     [
+      2890.0,
+      0.5
+     ],
+     [
+      5100.0,
+      0.2
+     ]
+    ],
+    "idle_gain": 0.02,
+    "noise_v": 0.05
+   }
+  },
+  {
+   "index": 8,
+   "id": "DP-09",
+   "name": "Dynamic pressure 9",
+   "sensor_type": "dynamic_pressure",
+   "unit": "bar",
+   "gain": 0.5,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      1480.0,
+      1.2
+     ],
+     [
+      2960.0,
+      0.5
+     ],
+     [
+      5100.0,
+      0.2
+     ]
+    ],
+    "idle_gain": 0.02,
+    "noise_v": 0.05
+   }
+  },
+  {
+   "index": 9,
+   "id": "DP-10",
+   "name": "Dynamic pressure 10",
+   "sensor_type": "dynamic_pressure",
+   "unit": "bar",
+   "gain": 0.5,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      1515.0,
+      1.2
+     ],
+     [
+      3030.0,
+      0.5
+     ],
+     [
+      5100.0,
+      0.2
+     ]
+    ],
+    "idle_gain": 0.02,
+    "noise_v": 0.05
+   }
+  },
+  {
+   "index": 10,
+   "id": "VIB-01",
+   "name": "Accelerometer 1",
+   "sensor_type": "vibration",
+   "unit": "g",
+   "gain": 10.0,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      800.0,
+      0.8
+     ],
+     [
+      3200.0,
+      0.6
+     ],
+     [
+      12000.0,
+      0.25
+     ]
+    ],
+    "idle_gain": 0.03,
+    "noise_v": 0.04
+   }
+  },
+  {
+   "index": 11,
+   "id": "VIB-02",
+   "name": "Accelerometer 2",
+   "sensor_type": "vibration",
+   "unit": "g",
+   "gain": 10.0,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      820.0,
+      0.8
+     ],
+     [
+      3250.0,
+      0.6
+     ],
+     [
+      12000.0,
+      0.25
+     ]
+    ],
+    "idle_gain": 0.03,
+    "noise_v": 0.04
+   }
+  },
+  {
+   "index": 12,
+   "id": "VIB-03",
+   "name": "Accelerometer 3",
+   "sensor_type": "vibration",
+   "unit": "g",
+   "gain": 10.0,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      840.0,
+      0.8
+     ],
+     [
+      3300.0,
+      0.6
+     ],
+     [
+      12000.0,
+      0.25
+     ]
+    ],
+    "idle_gain": 0.03,
+    "noise_v": 0.04
+   }
+  },
+  {
+   "index": 13,
+   "id": "VIB-04",
+   "name": "Accelerometer 4",
+   "sensor_type": "vibration",
+   "unit": "g",
+   "gain": 10.0,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      860.0,
+      0.8
+     ],
+     [
+      3350.0,
+      0.6
+     ],
+     [
+      12000.0,
+      0.25
+     ]
+    ],
+    "idle_gain": 0.03,
+    "noise_v": 0.04
+   }
+  },
+  {
+   "index": 14,
+   "id": "VIB-05",
+   "name": "Accelerometer 5",
+   "sensor_type": "vibration",
+   "unit": "g",
+   "gain": 10.0,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      880.0,
+      0.8
+     ],
+     [
+      3400.0,
+      0.6
+     ],
+     [
+      12000.0,
+      0.25
+     ]
+    ],
+    "idle_gain": 0.03,
+    "noise_v": 0.04
+   }
+  },
+  {
+   "index": 15,
+   "id": "VIB-06",
+   "name": "Accelerometer 6",
+   "sensor_type": "vibration",
+   "unit": "g",
+   "gain": 10.0,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      900.0,
+      0.8
+     ],
+     [
+      3450.0,
+      0.6
+     ],
+     [
+      12000.0,
+      0.25
+     ]
+    ],
+    "idle_gain": 0.03,
+    "noise_v": 0.04
+   }
+  },
+  {
+   "index": 16,
+   "id": "VIB-07",
+   "name": "Accelerometer 7",
+   "sensor_type": "vibration",
+   "unit": "g",
+   "gain": 10.0,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      920.0,
+      0.8
+     ],
+     [
+      3500.0,
+      0.6
+     ],
+     [
+      12000.0,
+      0.25
+     ]
+    ],
+    "idle_gain": 0.03,
+    "noise_v": 0.04
+   }
+  },
+  {
+   "index": 17,
+   "id": "VIB-08",
+   "name": "Accelerometer 8",
+   "sensor_type": "vibration",
+   "unit": "g",
+   "gain": 10.0,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      940.0,
+      0.8
+     ],
+     [
+      3550.0,
+      0.6
+     ],
+     [
+      12000.0,
+      0.25
+     ]
+    ],
+    "idle_gain": 0.03,
+    "noise_v": 0.04
+   }
+  },
+  {
+   "index": 18,
+   "id": "VIB-09",
+   "name": "Accelerometer 9",
+   "sensor_type": "vibration",
+   "unit": "g",
+   "gain": 10.0,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      960.0,
+      0.8
+     ],
+     [
+      3600.0,
+      0.6
+     ],
+     [
+      12000.0,
+      0.25
+     ]
+    ],
+    "idle_gain": 0.03,
+    "noise_v": 0.04
+   }
+  },
+  {
+   "index": 19,
+   "id": "VIB-10",
+   "name": "Accelerometer 10",
+   "sensor_type": "vibration",
+   "unit": "g",
+   "gain": 10.0,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      980.0,
+      0.8
+     ],
+     [
+      3650.0,
+      0.6
+     ],
+     [
+      12000.0,
+      0.25
+     ]
+    ],
+    "idle_gain": 0.03,
+    "noise_v": 0.04
+   }
+  },
+  {
+   "index": 20,
+   "id": "AE-01",
+   "name": "Acoustic emission 1",
+   "sensor_type": "acoustic",
+   "unit": "Pa",
+   "gain": 100.0,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      6000.0,
+      0.7
+     ],
+     [
+      18000.0,
+      0.3
+     ]
+    ],
+    "idle_gain": 0.03,
+    "noise_v": 0.04
+   }
+  },
+  {
+   "index": 21,
+   "id": "AE-02",
+   "name": "Acoustic emission 2",
+   "sensor_type": "acoustic",
+   "unit": "Pa",
+   "gain": 100.0,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      6500.0,
+      0.7
+     ],
+     [
+      20000.0,
+      0.3
+     ]
+    ],
+    "idle_gain": 0.03,
+    "noise_v": 0.04
+   }
+  },
+  {
+   "index": 22,
+   "id": "SG-01",
+   "name": "Dynamic strain gauge 1",
+   "sensor_type": "strain",
+   "unit": "ustrain",
+   "gain": 200.0,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      450.0,
+      1.0
+     ],
+     [
+      900.0,
+      0.4
+     ]
+    ],
+    "idle_gain": 0.03,
+    "noise_v": 0.04
+   }
+  },
+  {
+   "index": 23,
+   "id": "SG-02",
+   "name": "Dynamic strain gauge 2",
+   "sensor_type": "strain",
+   "unit": "ustrain",
+   "gain": 200.0,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      470.0,
+      1.0
+     ],
+     [
+      940.0,
+      0.4
+     ]
+    ],
+    "idle_gain": 0.03,
+    "noise_v": 0.04
+   }
+  },
+  {
+   "index": 24,
+   "id": "HF-25",
+   "name": "Reference tone 1 kHz (always on)",
+   "sensor_type": "reference",
+   "unit": "V",
+   "gain": 1.0,
+   "offset": 0.0,
+   "raw_valid_min_v": -10.0,
+   "raw_valid_max_v": 10.0,
+   "enabled": true,
+   "sim": {
+    "tones": [
+     [
+      1000.0,
+      1.0
+     ]
+    ],
+    "idle_gain": 1.0,
+    "noise_v": 0.01
+   }
+  }
+ ],
+ "digital_inputs": [
+  {
+   "index": 0,
+   "id": "DI-00",
+   "name": "Emergency-stop loop healthy",
+   "kind": "estop",
+   "sim": {
+    "type": "estop_ok"
+   },
+   "expected_precheck": 1
+  },
+  {
+   "index": 1,
+   "id": "DI-01",
+   "name": "24 V supply OK",
+   "kind": "status",
+   "sim": {
+    "type": "const",
+    "value": 1
+   },
+   "expected_precheck": 1
+  },
+  {
+   "index": 2,
+   "id": "DI-02",
+   "name": "Pneumatic supply OK",
+   "kind": "status",
+   "sim": {
+    "type": "const",
+    "value": 1
+   },
+   "expected_precheck": 1
+  },
+  {
+   "index": 3,
+   "id": "DI-03",
+   "name": "Test cell door interlock closed",
+   "kind": "status",
+   "sim": {
+    "type": "const",
+    "value": 1
+   },
+   "expected_precheck": 1
+  },
+  {
+   "index": 4,
+   "id": "DI-04",
+   "name": "Igniter continuity OK",
+   "kind": "status",
+   "sim": {
+    "type": "const",
+    "value": 1
+   },
+   "expected_precheck": 1
+  },
+  {
+   "index": 5,
+   "id": "DI-05",
+   "name": "Remote enable key ON",
+   "kind": "status",
+   "sim": {
+    "type": "const",
+    "value": 1
+   },
+   "expected_precheck": 1
+  },
+  {
+   "index": 6,
+   "id": "DI-06",
+   "name": "OX main valve OPEN limit switch",
+   "kind": "valve_fb",
+   "sim": {
+    "type": "do_open",
+    "do": 0
+   },
+   "expected_precheck": null
+  },
+  {
+   "index": 7,
+   "id": "DI-07",
+   "name": "OX main valve CLOSED limit switch",
+   "kind": "valve_fb",
+   "sim": {
+    "type": "do_closed",
+    "do": 0
+   },
+   "expected_precheck": 1
+  },
+  {
+   "index": 8,
+   "id": "DI-08",
+   "name": "Fuel main valve OPEN limit switch",
+   "kind": "valve_fb",
+   "sim": {
+    "type": "do_open",
+    "do": 1
+   },
+   "expected_precheck": null
+  },
+  {
+   "index": 9,
+   "id": "DI-09",
+   "name": "Fuel main valve CLOSED limit switch",
+   "kind": "valve_fb",
+   "sim": {
+    "type": "do_closed",
+    "do": 1
+   },
+   "expected_precheck": 1
+  },
+  {
+   "index": 10,
+   "id": "DI-10",
+   "name": "OX vent OPEN limit switch",
+   "kind": "valve_fb",
+   "sim": {
+    "type": "do_open",
+    "do": 2
+   },
+   "expected_precheck": null
+  },
+  {
+   "index": 11,
+   "id": "DI-11",
+   "name": "OX vent CLOSED limit switch",
+   "kind": "valve_fb",
+   "sim": {
+    "type": "do_closed",
+    "do": 2
+   },
+   "expected_precheck": null
+  },
+  {
+   "index": 12,
+   "id": "DI-12",
+   "name": "Fuel vent OPEN limit switch",
+   "kind": "valve_fb",
+   "sim": {
+    "type": "do_open",
+    "do": 3
+   },
+   "expected_precheck": null
+  },
+  {
+   "index": 13,
+   "id": "DI-13",
+   "name": "Fuel vent CLOSED limit switch",
+   "kind": "valve_fb",
+   "sim": {
+    "type": "do_closed",
+    "do": 3
+   },
+   "expected_precheck": null
+  },
+  {
+   "index": 14,
+   "id": "DI-14",
+   "name": "Purge valve OPEN limit switch",
+   "kind": "valve_fb",
+   "sim": {
+    "type": "do_open",
+    "do": 4
+   },
+   "expected_precheck": null
+  },
+  {
+   "index": 15,
+   "id": "DI-15",
+   "name": "Purge valve CLOSED limit switch",
+   "kind": "valve_fb",
+   "sim": {
+    "type": "do_closed",
+    "do": 4
+   },
+   "expected_precheck": null
+  },
+  {
+   "index": 16,
+   "id": "DI-16",
+   "name": "OX pressurisation OPEN limit switch",
+   "kind": "valve_fb",
+   "sim": {
+    "type": "do_open",
+    "do": 5
+   },
+   "expected_precheck": null
+  },
+  {
+   "index": 17,
+   "id": "DI-17",
+   "name": "OX pressurisation CLOSED limit switch",
+   "kind": "valve_fb",
+   "sim": {
+    "type": "do_closed",
+    "do": 5
+   },
+   "expected_precheck": null
+  },
+  {
+   "index": 18,
+   "id": "DI-18",
+   "name": "Fuel pressurisation OPEN limit switch",
+   "kind": "valve_fb",
+   "sim": {
+    "type": "do_open",
+    "do": 6
+   },
+   "expected_precheck": null
+  },
+  {
+   "index": 19,
+   "id": "DI-19",
+   "name": "Fuel pressurisation CLOSED limit switch",
+   "kind": "valve_fb",
+   "sim": {
+    "type": "do_closed",
+    "do": 6
+   },
+   "expected_precheck": null
+  },
+  {
+   "index": 20,
+   "id": "DI-20",
+   "name": "Chamber pressure switch (>3 bar)",
+   "kind": "limit",
+   "sim": {
+    "type": "pc_gt",
+    "value": 3.0
+   },
+   "expected_precheck": 0
+  },
+  {
+   "index": 21,
+   "id": "DI-21",
+   "name": "Flame detector",
+   "kind": "status",
+   "sim": {
+    "type": "burning"
+   },
+   "expected_precheck": 0
+  },
+  {
+   "index": 22,
+   "id": "DI-22",
+   "name": "Deluge flow switch",
+   "kind": "limit",
+   "sim": {
+    "type": "do_open",
+    "do": 8
+   },
+   "expected_precheck": null
+  },
+  {
+   "index": 23,
+   "id": "DI-23",
+   "name": "OX tank level LOW",
+   "kind": "limit",
+   "sim": {
+    "type": "mass_lt",
+    "value": 10.0
+   },
+   "expected_precheck": 0
+  },
+  {
+   "index": 24,
+   "id": "DI-24",
+   "name": "Fuel tank level LOW",
+   "kind": "limit",
+   "sim": {
+    "type": "mass_lt",
+    "value": 10.0
+   },
+   "expected_precheck": 0
+  },
+  {
+   "index": 25,
+   "id": "DI-25",
+   "name": "Fire alarm panel OK",
+   "kind": "status",
+   "sim": {
+    "type": "const",
+    "value": 1
+   },
+   "expected_precheck": 1
+  },
+  {
+   "index": 26,
+   "id": "DI-26",
+   "name": "Gas detection system OK",
+   "kind": "status",
+   "sim": {
+    "type": "const",
+    "value": 1
+   },
+   "expected_precheck": 1
+  },
+  {
+   "index": 27,
+   "id": "DI-27",
+   "name": "UPS on mains",
+   "kind": "status",
+   "sim": {
+    "type": "const",
+    "value": 1
+   },
+   "expected_precheck": null
+  },
+  {
+   "index": 28,
+   "id": "DI-28",
+   "name": "Igniter command feedback",
+   "kind": "status",
+   "sim": {
+    "type": "do_open",
+    "do": 7
+   },
+   "expected_precheck": 0
+  },
+  {
+   "index": 29,
+   "id": "DI-29",
+   "name": "Spare digital input",
+   "kind": "spare",
+   "sim": {
+    "type": "const",
+    "value": 0
+   },
+   "expected_precheck": null
+  }
+ ],
+ "digital_outputs": [
+  {
+   "index": 0,
+   "id": "DO-00",
+   "name": "OX main valve (solenoid)",
+   "kind": "valve",
+   "safe_state": 0
+  },
+  {
+   "index": 1,
+   "id": "DO-01",
+   "name": "Fuel main valve (solenoid)",
+   "kind": "valve",
+   "safe_state": 0
+  },
+  {
+   "index": 2,
+   "id": "DO-02",
+   "name": "OX tank vent valve",
+   "kind": "valve",
+   "safe_state": 1
+  },
+  {
+   "index": 3,
+   "id": "DO-03",
+   "name": "Fuel tank vent valve",
+   "kind": "valve",
+   "safe_state": 1
+  },
+  {
+   "index": 4,
+   "id": "DO-04",
+   "name": "N2 purge valve",
+   "kind": "purge",
+   "safe_state": 1
+  },
+  {
+   "index": 5,
+   "id": "DO-05",
+   "name": "OX pressurisation valve",
+   "kind": "valve",
+   "safe_state": 0
+  },
+  {
+   "index": 6,
+   "id": "DO-06",
+   "name": "Fuel pressurisation valve",
+   "kind": "valve",
+   "safe_state": 0
+  },
+  {
+   "index": 7,
+   "id": "DO-07",
+   "name": "Igniter command (SIMULATED)",
+   "kind": "igniter",
+   "safe_state": 0
+  },
+  {
+   "index": 8,
+   "id": "DO-08",
+   "name": "Water deluge valve",
+   "kind": "valve",
+   "safe_state": 0
+  },
+  {
+   "index": 9,
+   "id": "DO-09",
+   "name": "Warning beacon",
+   "kind": "status",
+   "safe_state": 1
+  },
+  {
+   "index": 10,
+   "id": "DO-10",
+   "name": "Siren",
+   "kind": "status",
+   "safe_state": 1
+  },
+  {
+   "index": 11,
+   "id": "DO-11",
+   "name": "DAQ armed lamp",
+   "kind": "status",
+   "safe_state": 0
+  },
+  {
+   "index": 12,
+   "id": "DO-12",
+   "name": "Test active lamp",
+   "kind": "status",
+   "safe_state": 0
+  },
+  {
+   "index": 13,
+   "id": "DO-13",
+   "name": "Abort lamp",
+   "kind": "status",
+   "safe_state": 1
+  },
+  {
+   "index": 14,
+   "id": "DO-14",
+   "name": "High-speed camera trigger",
+   "kind": "trigger",
+   "safe_state": 0
+  },
+  {
+   "index": 15,
+   "id": "DO-15",
+   "name": "Spare digital output 15",
+   "kind": "spare",
+   "safe_state": 0
+  },
+  {
+   "index": 16,
+   "id": "DO-16",
+   "name": "Spare digital output 16",
+   "kind": "spare",
+   "safe_state": 0
+  },
+  {
+   "index": 17,
+   "id": "DO-17",
+   "name": "Spare digital output 17",
+   "kind": "spare",
+   "safe_state": 0
+  },
+  {
+   "index": 18,
+   "id": "DO-18",
+   "name": "Spare digital output 18",
+   "kind": "spare",
+   "safe_state": 0
+  },
+  {
+   "index": 19,
+   "id": "DO-19",
+   "name": "Spare digital output 19",
+   "kind": "spare",
+   "safe_state": 0
+  },
+  {
+   "index": 20,
+   "id": "DO-20",
+   "name": "Spare digital output 20",
+   "kind": "spare",
+   "safe_state": 0
+  },
+  {
+   "index": 21,
+   "id": "DO-21",
+   "name": "Spare digital output 21",
+   "kind": "spare",
+   "safe_state": 0
+  },
+  {
+   "index": 22,
+   "id": "DO-22",
+   "name": "Spare digital output 22",
+   "kind": "spare",
+   "safe_state": 0
+  },
+  {
+   "index": 23,
+   "id": "DO-23",
+   "name": "Spare digital output 23",
+   "kind": "spare",
+   "safe_state": 0
+  },
+  {
+   "index": 24,
+   "id": "DO-24",
+   "name": "Spare digital output 24",
+   "kind": "spare",
+   "safe_state": 0
+  },
+  {
+   "index": 25,
+   "id": "DO-25",
+   "name": "Spare digital output 25",
+   "kind": "spare",
+   "safe_state": 0
+  },
+  {
+   "index": 26,
+   "id": "DO-26",
+   "name": "Spare digital output 26",
+   "kind": "spare",
+   "safe_state": 0
+  },
+  {
+   "index": 27,
+   "id": "DO-27",
+   "name": "Spare digital output 27",
+   "kind": "spare",
+   "safe_state": 0
+  },
+  {
+   "index": 28,
+   "id": "DO-28",
+   "name": "Spare digital output 28",
+   "kind": "spare",
+   "safe_state": 0
+  },
+  {
+   "index": 29,
+   "id": "DO-29",
+   "name": "Spare digital output 29",
+   "kind": "spare",
+   "safe_state": 0
+  }
+ ],
+ "analog_outputs": [
+  {
+   "index": 0,
+   "id": "AO-00",
+   "name": "Oxidizer control valve command (VIRTUAL)",
+   "min_v": 0.0,
+   "max_v": 10.0,
+   "safe_v": 0.0
+  },
+  {
+   "index": 1,
+   "id": "AO-01",
+   "name": "Fuel control valve command (VIRTUAL)",
+   "min_v": 0.0,
+   "max_v": 10.0,
+   "safe_v": 0.0
+  }
+ ],
+ "flow_control": {
+  "target_total_flow_kg_s": 2.5,
+  "target_mixture_ratio": 2.0,
+  "ox_flow_channel": "FT-01",
+  "fuel_flow_channel": "FT-02",
+  "pid_ox": {
+   "kp": 2.5,
+   "ki": 22.0,
+   "kd": 0.0
+  },
+  "pid_fuel": {
+   "kp": 5.0,
+   "ki": 44.0,
+   "kd": 0.0
+  },
+  "derivative_filter_hz": 10.0,
+  "output_min_v": 0.0,
+  "output_max_v": 10.0,
+  "rate_limit_v_per_s": 20.0,
+  "settle_band_pct": 3.0,
+  "min_fuel_flow_for_mr_kg_s": 0.02
+ },
+ "sequence": {
+  "precheck_timeout_s": 10.0,
+  "precheck_stable_s": 1.0,
+  "auto_start_from_ready": false,
+  "start_duration_s": 2.0,
+  "start_purge_off_s": 0.3,
+  "start_igniter_on_s": 0.4,
+  "start_valves_open_s": 0.8,
+  "start_flow_fraction": 0.3,
+  "ignition_confirm_bar": 3.0,
+  "ramp_duration_s": 3.0,
+  "hold_duration_s": 8.0,
+  "shutdown_duration_s": 3.0,
+  "shutdown_valves_close_s": 1.0,
+  "shutdown_vent_open_s": 2.0,
+  "precheck_pressure_windows_bar": {
+   "PT-01": [
+    35.0,
+    45.0
+   ],
+   "PT-02": [
+    35.0,
+    45.0
+   ],
+   "PT-07": [
+    0.0,
+    2.5
+   ],
+   "PT-08": [
+    0.0,
+    2.5
+   ]
+  }
+ },
+ "safety": {
+  "pressure_abort_debounce_samples": 3,
+  "stale_time_s": 0.5,
+  "stale_epsilon_v": 1e-09,
+  "watchdog_timeout_s": 1.0,
+  "estop_di_channel": "DI-00"
+ },
+ "simulation": {
+  "seed": 12345,
+  "p_amb_bar": 1.0,
+  "t_amb_c": 22.0,
+  "tank_nominal_bar": 40.0,
+  "tau_pressurise_s": 0.6,
+  "tau_vent_s": 1.2,
+  "tank_droop_bar_per_kg_s": 0.8,
+  "kmax_ox_kg_s": 3.2,
+  "kmax_fuel_kg_s": 1.6,
+  "dp_nominal_bar": 20.0,
+  "tau_valve_s": 0.12,
+  "tau_flow_s": 0.05,
+  "tau_chamber_s": 0.03,
+  "pc_hot_bar_per_kg_s": 7.6,
+  "pc_cold_bar_per_kg_s": 0.6,
+  "thrust_n_per_bar": 158.0,
+  "initial_prop_mass_kg": 80.0,
+  "overpressure_fault_bar": 15.0,
+  "spike_fault_bar": 12.0,
+  "spike_duration_s": 0.05,
+  "hf_transient_amp_v": 4.0,
+  "hf_transient_freq_hz": 7000.0,
+  "hf_transient_decay_s": 0.004,
+  "hf_instability_freq_hz": 1850.0,
+  "hf_instability_amp_v": 3.0
+ },
+ "fft": {
+  "channel": "DP-01",
+  "size": 8192,
+  "window": "hann",
+  "averages": 4,
+  "allowed_sizes": [
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768
+  ]
+ },
+ "logging": {
+  "results_dir": "Results",
+  "csv_rate_hz": 10.0,
+  "write_tdms": true,
+  "hf_log_mode": "all",
+  "flush_interval_s": 1.0,
+  "queue_max_items": 2000,
+  "auto_start_on_precheck": true
+ },
+ "gui": {
+  "refresh_hz": 10.0
+ }
+}

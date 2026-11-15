@@ -1,0 +1,22 @@
+exec state: 1
+A set-point change during HOLD
+   targets 1.8 / 2.4 -> measured 1.798 / 2.399
+B unreachable target saturates at 10 V, stays in HOLD
+   valves 10.00 / 10.00 V, state HOLD
+   back to 2.5 -> 2.500 kg/s
+C FFT channel selection and instability tone
+   channel 24 reference: 1000 Hz, 1.001
+   channel 12: 840 Hz, 0.998 (expected 840 Hz)
+   instability tone on: 1850 Hz, 3.001 (expected 1850 Hz, 3.0)
+D operator stop (command 3) during HOLD -> controlled shutdown
+   reached COMPLETE valves 0.0 0.0
+E manual abort (command 5) during RAMP
+   abort code 6.0
+F cancel from READY (command 3) returns to IDLE
+G lowered abort limit trips in HOLD
+   abort code 1.0
+H digital outputs in ABORT vs HOLD checked via DIO array
+   HOLD: main valves 1.0 1.0 vents 0.0 igniter 0.0 | DI main open 1.0 flame 1.0
+   ABORT: main valves 0.0 0.0 vents 1.0 purge 1.0 abort lamp 1.0 | DI e-stop healthy 0.0
+stopped; exec state: 1
+ALL OK

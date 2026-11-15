@@ -1,0 +1,11 @@
+exec state: 1
+IDLE     -> 'IDLE' | abort reason: 'none'
+state names seen: ['PRE-CHECK', 'READY', 'START (simulated)', 'RAMP', 'HOLD']
+dominant frequency: 1200.0 Hz
+ABORT    -> 'ABORT' | 'OVERPRESSURE - pressure above abort limit'
+code 2   -> 'SENSOR FAILURE - pressure sensor out of range or disconnected'
+code 3   -> 'SENSOR FAILURE - stale (frozen) measurement'
+e-stop   -> 'EMERGENCY STOP'
+manual   -> 'MANUAL ABORT'
+stopped; exec state: 1
+ALL OK

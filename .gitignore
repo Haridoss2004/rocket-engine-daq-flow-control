@@ -1,0 +1,26 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# generated run data
+Results/RUN_*/
+Results/exports/
+Results/test_results.*
+*.tdms
+*.tdms_index
+
+# LabVIEW user state
+*.aliases
+*.lvlps
+.*.UserState/
+
+# unused screenshots
+docs/images/python_gui/*
+!docs/images/python_gui/01_system_overview.png
+!docs/images/python_gui/03_high_frequency.png
+!docs/images/python_gui/05_flow_control.png
+!docs/images/python_gui/11_abort_sequence.png
+
+# run output folder (created automatically)
+Results/*
+!Results/.gitkeep
