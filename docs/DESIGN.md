@@ -12,7 +12,7 @@ simulation.
 | Test sequence | IDLE, PRE-CHECK, READY, START, RAMP, HOLD, SHUTDOWN, COMPLETE, ABORT | All states in order; start refused while a pre-check fails |
 | Log data with timestamps | One row per 1 ms sample: time, state, abort code, set-point, flows, valve commands, 50 raw and 50 scaled values | 54,700 rows × 108 columns in the test run |
 | Live slow data and FFT of one fast channel | Strip chart, channel arrays, waveform graph, FFT graph, dominant frequency | 1200 Hz at amplitude 1.001 (expected 1.0); injected 1850 Hz tone found at 3.000 |
-| Abort on pressure limit | Operator-set limit on chamber pressure with a 3-sample debounce | Abort within one loop iteration; valve commands 0 V; reason shown as text |
+| Abort if any pressure exceeds a limit | All 20 pressure channels are checked on every sample with a 3-sample debounce. Chamber channels use the operator-set limit; tank, line and injector channels use 50 bar | Chamber overpressure and tank overpressure both abort within one loop iteration; valve commands 0 V; reason shown as text |
 
 Also implemented: abort on pressure-sensor failure (out of range, frozen), E-stop, failed ignition and
 manual abort; reset refused while the cause is still present.
@@ -45,6 +45,11 @@ for the first-order valve and line dynamics assumed. Gains were tuned against th
 **Sequence.** Tanks are pressurised during pre-check. Igniter before propellant valves. Start at 30 %
 flow, confirm chamber pressure, then ramp. Shutdown ramps the commands down, closes the main valves, then
 purges and vents. All timings are parameters.
+
+**Pressure limits.** Each pressure channel has a limit suited to what it measures. The chamber channels
+share the operator-set limit (28 bar by default, against 20 bar in HOLD). Tank, feed-line and injector
+channels run near 40 bar, so they use a fixed 50 bar limit. One common limit would either trip on the
+tanks or be useless for the chamber.
 
 **Abort and safe state.** Safe state: main valves closed, igniter off, pressurisation closed, vents open,
 purge on, both analog commands 0 V. An abort is latched and needs an operator reset, which is refused
@@ -95,7 +100,7 @@ abstraction layer separates the simulator from an NI-DAQmx backend that reads in
 - control accuracy in HOLD, set-point change, saturation at 10 V and recovery
 - scaling of pressure channels
 - FFT on three channels and an injected tone, frequency and amplitude
-- aborts: overpressure, lowered limit, sensor disconnected, sensor frozen, E-stop, manual
+- aborts: chamber overpressure, tank overpressure, lowered limit, sensor disconnected, sensor frozen, E-stop, manual
 - reset refused while a fault is active; start blocked by a failed pre-check
 - operator stop and cancel
 - digital output states in HOLD and in ABORT

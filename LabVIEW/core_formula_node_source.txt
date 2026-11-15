@@ -2,7 +2,7 @@
    Demonstration values only. Outputs are virtual, nothing drives hardware. */
 float64 Xn[32], RAW[50], ENG[50], LOG[10800], HFW[5000], HFS[5000], HRMS[25], DIO[60];
 float64 TV[50], G[50], O[50];
-int32 i, k, c, st, burn, enab, mainv, vent, press, ign, purge, code, ok, pcmd, sat;
+int32 i, k, c, st, burn, enab, mainv, vent, press, ign, purge, code, ok, pcmd, sat, ovr;
 float64 dt, amb, tt, tent, pot, pft, pox, pfu, fo, ff, pc, tch, io, ifu, uo, uf;
 float64 ac, at, oks, ovc, hfn, mass, lastr, stale, el, frac, spt, spo, spf, e, un, us;
 float64 pcm, dp, ft, kc, tg, tau, thr, r, v, lv, a, f1, s2, ph, lim, fom, ffm, step;
@@ -74,7 +74,7 @@ for (k = 0; k < 100; k++) {
   tch = tch + (tg - tch) * dt / tau;
   thr = 158.0 * (pcm - amb); if (thr < 0.0) { thr = 0.0; } if (!burn) { thr = thr * 0.05; }
   /* true values of the 50 slow channels */
-  TV[0] = pot; TV[1] = pft; TV[2] = pot - 1.4 * fo; TV[3] = pft - 1.4 * ff;
+  TV[0] = pot; if (fault == 4) { TV[0] = pot + 15.0; } TV[1] = pft; TV[2] = pot - 1.4 * fo; TV[3] = pft - 1.4 * ff;
   TV[4] = pcm * 1.05; TV[5] = pcm * 1.05; TV[6] = pcm; TV[7] = pcm;
   TV[8] = 1.0 + 14.0 * purge; TV[9] = 8.0; TV[10] = pot * 1.02 + 0.3; TV[11] = pft * 1.02 + 0.3;
   TV[12] = 0.99 * (pot - 1.4 * fo); TV[13] = 0.99 * (pft - 1.4 * ff); TV[14] = 0.95 * pcm;
@@ -99,7 +99,16 @@ for (k = 0; k < 100; k++) {
     if (RAW[i] < 0.5 || RAW[i] > 9.8) { ok = 0; if (st >= 2 && st <= 6 && code == 0) { code = 2; } }
   }
   if (stale >= 500.0) { ok = 0; if (st >= 2 && st <= 6 && code == 0) { code = 3; } }
-  if (ENG[6] > plimit || ENG[7] > plimit) { ovc = ovc + 1.0; } else { ovc = 0.0; }
+  /* overpressure: EVERY pressure channel is checked against its limit.
+     chamber channels (PT-07, PT-08, PT-15, PT-16) use the operator limit,
+     tank, line and injector channels use 50 bar */
+  ovr = 0;
+  for (i = 0; i < 20; i++) {
+    lim = 50.0;
+    if (i == 6 || i == 7 || i == 14 || i == 15) { lim = plimit; }
+    if (ENG[i] > lim) { ovr = 1; }
+  }
+  if (ovr) { ovc = ovc + 1.0; } else { ovc = 0.0; }
   if (ovc >= 3.0 && st >= 2 && st <= 6 && code == 0) { code = 1; }
   if (estop > 0.5 && code == 0) { code = 4; }
   if (code != 0 && st != 8) { st = 8; tent = tt; ac = code; at = tt; uo = 0.0; uf = 0.0; io = 0.0; ifu = 0.0; enab = 0; }

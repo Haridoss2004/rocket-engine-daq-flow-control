@@ -68,6 +68,13 @@ setc(estop=1); ok &= wait_state(8, 2); time.sleep(0.3); d = get("DIO [60]")
 print("   ABORT: main valves", d[30], d[31], "vents", d[32], "purge", d[34], "abort lamp", d[43], "| DI e-stop healthy", d[0])
 ok &= d[30] == 0 and d[32] == 1 and d[34] == 1 and d[43] == 1 and d[0] == 0
 setc(estop=0); cmd(4); ok &= wait_state(0, 3); setc(cmd=0)
+print("I overpressure on a NON-chamber pressure channel (tank PT-01, fixed 50 bar limit) also aborts")
+cmd(1); ok &= wait_state(2, 15); cmd(2); ok &= wait_state(5, 15); time.sleep(0.8)
+print("   before fault: state", NAMES[st()], "| PT-01 %.1f bar, PT-07 %.1f bar" % (get("Slow ch scaled [50]")[0], get("Slow ch scaled [50]")[6]))
+setc(fault=4); ok &= wait_state(8, 2); time.sleep(0.3)
+print("   abort code", get("Abort code"), "|", get("Abort reason")); ok &= get("Abort code") == 1
+cmd(4); time.sleep(0.4); print("   reset while fault active ->", NAMES[st()]); ok &= st() == 8
+setc(fault=0); cmd(4); ok &= wait_state(0, 3); setc(cmd=0)
 vi.SetControlValue("stop", True); time.sleep(1.0)
 print("stopped; exec state:", vi.ExecState)
 print("ALL OK" if ok else "SOMETHING FAILED")
